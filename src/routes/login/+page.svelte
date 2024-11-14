@@ -93,6 +93,17 @@
 					<a href="/signup" class="text-primary hover:underline">Contact support</a>
 				</p>
 			</CardFooter>
+			<div class="my-8 text-center text-sm text-muted-foreground">
+				Made with ❤️ by
+				<a
+					href="https://shipitdigital.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="font-medium text-primary hover:underline"
+				>
+					Ship it Digital
+				</a>
+			</div>
 		</Card>
 	</div>
 </div>
