@@ -29,7 +29,7 @@
 
 <div class="container mx-auto space-y-6 p-6">
 	<!-- Page Header -->
-	<div class="flex items-center justify-between">
+	<div class="flex flex-col md:flex-row gap-6 items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold tracking-tight">Dashboard</h1>
 			<p class="text-muted-foreground">Welcome back, Admin</p>
@@ -100,42 +100,49 @@
 		<!-- Active Jobs -->
 		<Card class="lg:col-span-2">
 			<CardHeader>
-				<CardTitle>Active Jobs</CardTitle>
-				<CardDescription>Overview of currently active jobs</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<div class="space-y-4">
-					{#each activeJobs as job}
-						<div class="flex items-center rounded-lg border p-4">
-							<div class="flex-1 space-y-1">
-								<div class="flex items-center justify-between">
-									<span class="font-medium">Job #{job.id}</span>
-									<Badge variant="outline" class={getDriverStatusColor(job.status)}>
-										{job.status}
-									</Badge>
-								</div>
-								<div class="flex items-center text-sm text-muted-foreground">
-									<MapPin class="mr-1 h-4 w-4" />
-									{job.pickup} → {job.dropoff}
-								</div>
-								<div class="flex items-center justify-between text-sm">
-									<span class="flex items-center">
-										<Car class="mr-1 h-4 w-4" />
-										{job.driver}
-									</span>
-									<span class="flex items-center">
-										<Clock class="mr-1 h-4 w-4" />
-										ETA: {job.estimatedTime}
-									</span>
-								</div>
-							</div>
-						</div>
-					{/each}
-				</div>
-			</CardContent>
-			<CardFooter>
-				<Button variant="outline" class="w-full">View All Jobs</Button>
-			</CardFooter>
+        <CardTitle>Active Jobs</CardTitle>
+        <CardDescription>Overview of currently active jobs</CardDescription>
+    </CardHeader>
+    <CardContent>
+        <div class="space-y-4">
+            {#each activeJobs as job}
+                <div class="flex items-center justify-between rounded-lg border p-4">
+                    <div class="flex-1 space-y-1 border-r-2 pr-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">Job #{job.id}</span>
+                            <Badge variant="outline" class={getDriverStatusColor(job.status)}>
+                                {job.status}
+                            </Badge>
+                        </div>
+                        <div class="flex items-center text-sm text-muted-foreground">
+                            <MapPin class="mr-1 h-4 w-4" />
+                            {job.pickup} → {job.dropoff}
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="flex items-center">
+                                <Car class="mr-1 h-4 w-4" />
+                                {job.driver}
+                            </span>
+                            <span class="flex items-center">
+                                <Clock class="mr-1 h-4 w-4" />
+                                ETA: {job.estimatedTime}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <a href="/jobs/{job.id}">
+                            <Button variant="outline" size="sm">View Details</Button>
+                        </a>
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </CardContent>
+    <CardFooter>
+        <a href="/jobs" class="w-full">
+            <Button variant="outline" class="w-full">View All Jobs</Button>
+        </a>
+    </CardFooter>
 		</Card>
 
 		<!-- Sidebar -->
@@ -171,22 +178,29 @@
 			<!-- Recent Activity -->
 			<Card>
 				<CardHeader>
-					<CardTitle>Recent Activity</CardTitle>
-					<CardDescription>Latest updates and notifications</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div class="space-y-4">
-						{#each recentActivity as activity}
-							<div class="flex items-center">
-								<div class="mr-2 h-2 w-2 rounded-full bg-primary"></div>
-								<div class="flex-1">
-									<p class="text-sm">{activity.message}</p>
-									<p class="text-xs text-muted-foreground">{activity.time}</p>
-								</div>
-							</div>
-						{/each}
-					</div>
-				</CardContent>
+          <div class="flex items-center justify-between">
+              <div>
+                  <CardTitle>Recent Activity</CardTitle>
+                  <CardDescription>Latest updates and notifications</CardDescription>
+              </div>
+              <a href="/activity">
+                  <Button variant="outline" size="sm">View All</Button>
+              </a>
+          </div>
+      </CardHeader>
+      <CardContent>
+          <div class="space-y-4">
+              {#each recentActivity as activity}
+                  <div class="flex items-center">
+                      <div class="mr-2 h-2 w-2 rounded-full bg-primary"></div>
+                      <div class="flex-1">
+                          <p class="text-sm">{activity.message}</p>
+                          <p class="text-xs text-muted-foreground">{activity.time}</p>
+                      </div>
+                  </div>
+              {/each}
+          </div>
+      </CardContent>
 			</Card>
 		</div>
 	</div>
