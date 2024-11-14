@@ -11,7 +11,7 @@
 	let {
 		driverId,
 		driverName,
-		open = $bindable()
+		open = $bindable(false)
 	} = $props<{
 		jobId: string;
 		driverId: string;

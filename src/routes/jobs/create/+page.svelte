@@ -27,7 +27,7 @@
 	import type { JobFormData, JobFormErrors } from '$lib/types';
 	import { vehicleTypes } from '$lib/values';
 
-	const df = new DateFormatter('en-UK', {
+	const df = new DateFormatter('en-GB', {
 		dateStyle: 'long'
 	});
 	let formData: JobFormData = $state({

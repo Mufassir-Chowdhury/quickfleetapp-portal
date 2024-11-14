@@ -15,6 +15,12 @@ export const load: PageLoad = async () => {
 			latitude: 51.5237,
 			longitude: -0.1583
 		},
+		driver: {
+			id: 'DRV001',
+			name: 'John Doe',
+			vehicle: 'SUV',
+			phoneNumber: '+44 123 456 7890'
+		},
 		date: '2024-11-14',
 		time: '15:30',
 		passengers: 2,

@@ -124,7 +124,7 @@
 					<div class="flex items-center space-x-2">
 						<NotificationsPopover />
 						{#if job.driver}
-							<Button variant="outline" size="icon" on:click={() => (showChatDialog = true)}>
+							<Button variant="outline" size="icon" onclick={() => (showChatDialog = true)}>
 								<MessageCircle class="h-5 w-5" />
 							</Button>
 						{/if}
