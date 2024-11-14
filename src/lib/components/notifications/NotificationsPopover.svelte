@@ -6,17 +6,7 @@
 	import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { format } from 'date-fns';
-
-	interface Notification {
-		id: string;
-		type: 'job_created' | 'job_assigned' | 'job_completed' | 'message' | 'system';
-		title: string;
-		message: string;
-		timestamp: string;
-		read: boolean;
-		jobId?: string;
-		driverId?: string;
-	}
+	import type { Notification, NotificationType } from '$lib/types';
 
 	let notifications: Notification[] = [
 		{
@@ -53,9 +43,13 @@
 		notifications = notifications.map((notification) => ({ ...notification, read: true }));
 	}
 
-	function getNotificationIcon(type: Notification['type']) {
+	function getNotificationIcon(type: NotificationType) {
 		// You can import and use different icons based on type
-		return Bell;
+		if (type === 'job_created') {
+			return Bell;
+		} else if (type === 'message') {
+			return Bell;
+		}
 	}
 
 	function formatTimestamp(timestamp: string): string {

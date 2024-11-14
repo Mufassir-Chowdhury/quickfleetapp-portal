@@ -1,6 +1,5 @@
 <!-- src/routes/jobs/create/+page.svelte -->
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import {
 		Card,
@@ -51,14 +50,14 @@
 		fare: null,
 		notes: ''
 	});
-	let selectedVehicleType = undefined;
+	let selectedVehicleType = $state({ label: '', value: '' });
 	$effect(() => {
-		formData.vehicleType
+		selectedVehicleType = formData.vehicleType
 			? {
 					label: formData.vehicleType,
 					value: formData.vehicleType
 				}
-			: undefined;
+			: { label: '', value: '' };
 	});
 
 	let errors: JobFormErrors = $state({});

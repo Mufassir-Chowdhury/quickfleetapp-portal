@@ -6,22 +6,20 @@
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { format } from 'date-fns';
 	import { Send } from 'lucide-svelte';
+	import type { Message } from '$lib/types';
 
-	export let jobId: string;
-	export let driverId: string;
-	export let driverName: string;
-	export let open = false;
+	let {
+		driverId,
+		driverName,
+		open = $bindable()
+	} = $props<{
+		jobId: string;
+		driverId: string;
+		driverName: string;
+		open: boolean;
+	}>();
 
-	interface Message {
-		id: string;
-		senderId: string;
-		senderName: string;
-		content: string;
-		timestamp: string;
-		isOperator: boolean;
-	}
-
-	let messages: Message[] = [
+	let messages: Message[] = $state([
 		{
 			id: 'msg1',
 			senderId: 'op1',
@@ -38,16 +36,17 @@
 			timestamp: new Date(Date.now() - 1800000).toISOString(),
 			isOperator: false
 		}
-	];
+	]);
 
-	let newMessage = '';
+	let newMessage = $state('');
 	let scrollArea: HTMLDivElement;
 
 	function handleClose() {
 		open = false;
 	}
 
-	async function handleSend() {
+	async function handleSend(e: { preventDefault: () => void }) {
+		e.preventDefault();
 		if (!newMessage.trim()) return;
 
 		const message: Message = {
@@ -105,7 +104,7 @@
 			</ScrollArea>
 
 			<div class="border-t p-4">
-				<form class="flex gap-2" on:submit|preventDefault={handleSend}>
+				<form class="flex gap-2" onsubmit={handleSend}>
 					<Input type="text" placeholder="Type your message..." bind:value={newMessage} />
 					<Button type="submit" size="icon">
 						<Send class="h-4 w-4" />

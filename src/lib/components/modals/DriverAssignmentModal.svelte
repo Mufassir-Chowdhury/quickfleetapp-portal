@@ -14,7 +14,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Search, Car, MapPin, Phone } from 'lucide-svelte';
 
-	export let jobId: string;
+	let { jobId } = $props<{ jobId: string }>();
 
 	const dispatch = createEventDispatcher();
 
@@ -29,9 +29,9 @@
 		phoneNumber: string;
 	}
 
-	let searchQuery = '';
-	let selectedDriver: string | null = null;
-	let isLoading = false;
+	let searchQuery = $state('');
+	let selectedDriver: string | null = $state(null);
+	let isLoading = $state(false);
 
 	// Sample data - Replace with actual API call
 	let drivers: Driver[] = [
@@ -57,7 +57,7 @@
 		}
 	];
 
-	let filteredDrivers = drivers;
+	let filteredDrivers = $state(drivers);
 
 	function getStatusColor(status: Driver['status']): string {
 		const colors = {
@@ -82,10 +82,11 @@
 		);
 	}
 
-	$: {
-		searchQuery;
-		filterDrivers();
-	}
+	$effect(() => {
+		if (searchQuery) {
+			filterDrivers();
+		}
+	});
 
 	function handleClose() {
 		dispatch('close');
@@ -130,8 +131,8 @@
 				<div
 					class="cursor-pointer rounded-lg border p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
 					class:bg-accent={selectedDriver === driver.id}
-					on:click={() => (selectedDriver = driver.id)}
-					on:keydown={(e) => e.key === 'Enter' && (selectedDriver = driver.id)}
+					onclick={() => (selectedDriver = driver.id)}
+					onkeydown={(e) => e.key === 'Enter' && (selectedDriver = driver.id)}
 					role="button"
 					tabindex="0"
 				>
