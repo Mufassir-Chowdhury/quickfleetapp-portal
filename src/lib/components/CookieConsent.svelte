@@ -17,8 +17,7 @@
 		DialogDescription,
 		DialogFooter,
 		DialogHeader,
-		DialogTitle,
-		DialogTrigger
+		DialogTitle
 	} from '$lib/components/ui/dialog';
 	import { Switch } from '$lib/components/ui/switch';
 	import { Cookie, X } from 'lucide-svelte';

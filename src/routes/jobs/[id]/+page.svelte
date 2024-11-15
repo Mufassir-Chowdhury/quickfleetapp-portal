@@ -45,6 +45,7 @@
 	// Import the driver assignment modal component
 	import DriverAssignmentModal from '$lib/components/modals/DriverAssignmentModal.svelte';
 	import type { Job } from '$lib/types';
+	import DriverInfoModal from '$lib/components/modals/DriverInfoModal.svelte';
 
 	let { data } = $props();
 	let sampleJob = data.props.job;
@@ -214,7 +215,7 @@
 						<div class="grid gap-2">
 							<div class="flex items-center space-x-2">
 								<User class="h-4 w-4 text-muted-foreground" />
-								<span>{job.driver.name}</span>
+								<span><DriverInfoModal name={job.driver.name} id={job.driver.id} /></span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<Car class="h-4 w-4 text-muted-foreground" />
